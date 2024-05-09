@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  operations_api:
+    container_name: 'operations-api'
+    image: 'operations-api:lastest'
+    ports:
+      - 8080:8080
+    depends_on:
+      - operations_db
+
+  operations_db:
+    image: 'postgres:alpine'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=printscript-operations
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - operations_volume:/var/lib/postgresql/data
+
+  snippet_runner_api:
+    image: 'ingsis-sinppetrunner-api:lastest'
+    ports:
+      - 8081:8080
+    depends_on:
+      - snippet-runner-db
+
+  snippet-runner-db:
+    image: 'postgres:alpine'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=printscript-snippet-runner
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - snippetrunner_volume:/var/lib/postgresql/data
+
+  permission_api:
+    image: 'ingsis-permission-api:lastest'
+    ports:
+      - 8082:8080
+    depends_on:
+      - permission-db
+
+  permission-db:
+    image: 'postgres:alpine'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=printscript-permission
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - permission_volume:/var/lib/postgresql/data
+
+
+volumes:
+  operations_volume:
+    external: true
+
+  snippetrunner_volume:
+    external: true
+
+  permission_volume:
+    external: true
+
