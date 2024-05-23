@@ -8,6 +8,6 @@
 #comandos a seguir:
 #cd ingSis-microservices
 #git pull
-#username : marcocastagnaro
-#password: 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
+#username : token
+#password: token
 #docker compose up --build
