@@ -16,7 +16,7 @@ chmod 400 dev_key.pem
 
 ssh -t -i dev_key.pem tricolor-ingsis@4.203.104.146 << EOF
   cd ${REPO_PATH}
-  git pull https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/${GIT_USERNAME}/${REPO_PATH}.git
+  sudo git pull https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/${GIT_USERNAME}/${REPO_PATH}.git
   docker compose up --build
 EOF
 rm dev_key.pem
