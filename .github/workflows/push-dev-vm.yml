@@ -18,10 +18,10 @@ jobs:
           DEVVM_KEY: ${{ secrets.INGSIS_DEV_KEY }}
           GH_TOKEN: ${{ secrets.DOCKER_PACKAGES_SECRET }}
         run: |
-          echo "$DEVVM_KEY" > dev_key.pem
-          echo "$GH_TOKEN" > GH_TOKEN
+          echo "$DEVVM_KEY" > DEVVM_KEY
+          echo "$GH_TOKEN" > GIT_TOKEN
           chmod 400 dev_key.pem
 
       - name: Run deploy script
         run: |
-          ./deployDevVm.sh
+          ./deployDev.sh
