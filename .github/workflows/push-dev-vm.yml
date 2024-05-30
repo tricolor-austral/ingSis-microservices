@@ -16,6 +16,7 @@ jobs:
         env:
           DEVVM_KEY: ${{ secrets.INGSIS_DEV_KEY }}
           GH_TOKEN: ${{ secrets.GIT_TOKEN }}
+
         run: |
           echo "$DEVVM_KEY"
           echo "$DEVVM_KEY" > DEVVM_KEY
