@@ -78,8 +78,5 @@ services:
 
 volumes:
   operations_volume:
-    external: true
   snippetrunner_volume:
-    external: true
   permission_volume:
-    external: true
