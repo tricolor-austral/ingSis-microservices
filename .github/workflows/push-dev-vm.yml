@@ -18,11 +18,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GIT_TOKEN }}
 
         run: |
-          echo "$DEVM_KEY"
-          echo "$DEVM_KEY" > DEVM_KEY
-          echo "$GH_TOKEN" > GIT_TOKEN
+          echo "$DEVM_KEY" > dev_key.pem
+          echo "$GH_TOKEN" > git_token
 
       - name: Run deploy script
         run: |
+          set -e # Exit immediately if a command exits with a non-zero status.
           ./deployDev.sh
           echo "VERSION 1.01"

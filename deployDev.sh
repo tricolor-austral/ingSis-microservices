@@ -8,6 +8,7 @@ GIT_TOKEN="GIT_TOKEN"
 DEVM_KEY="DEVM_KEY"
 
 echo "$DEVM_KEY" > dev_key.pem
+
 echo "Deploying to the development server"
 echo "$DEVM_KEY"
 echo dev_key.pem
