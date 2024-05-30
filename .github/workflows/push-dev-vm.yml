@@ -1,4 +1,4 @@
-name: Deploy to VM
+name: Deploy to Azure VM
 
 on:
   push:
@@ -13,23 +13,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.INGSIS_DEV_KEY }}
-
-      - name: Set up Git for GitHub Actions
-        run: |
-          git config --global url."https://${{ env.GH_TOKEN }}:@github.com/".insteadOf "https://github.com/"
-
-      - name: Deploy to VM
+      - name: Set up SSH key
         env:
-          SSH_HOST: "tricolor-ingsis@4.203.104.146"
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          DEVVM_KEY: ${{ secrets.INGSIS_DEV_KEY }}
+          GH_TOKEN: ${{ secrets.DOCKER_PACKAGES_SECRET }}
         run: |
-          ssh -o StrictHostKeyChecking=no $SSH_HOST << 'EOF'
-            cd ingSis-microservices
-            git pull
-            docker compose up --build -d
-          EOF
+          echo "$DEVVM_KEY" > dev_key.pem
+          echo "$GH_TOKEN" > GH_TOKEN
+          chmod 400 dev_key.pem
+
+      - name: Run deploy script
+        run: |
+          ./deployDevVm.sh
