@@ -25,3 +25,4 @@ jobs:
       - name: Run deploy script
         run: |
           ./deployDev.sh
+          echo "VERSION 1.01"
