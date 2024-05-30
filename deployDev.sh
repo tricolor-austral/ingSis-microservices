@@ -5,11 +5,11 @@ SSH_HOST="4.203.104.146"
 REPO_PATH="ingSis-microservices"
 GIT_USERNAME="tricolor-austral"
 GIT_TOKEN="GIT_TOKEN"
-DEVVM_KEY="DEVM_KEY"
+DEVM_KEY="DEVM_KEY"
 
-echo "$DEVVM_KEY" > dev_key.pem
+echo "$DEVM_KEY" > dev_key.pem
 echo "Deploying to the development server"
-echo "$DEVVM_KEY"
+echo "$DEVM_KEY"
 echo dev_key.pem
 
 chmod 400 dev_key.pem
