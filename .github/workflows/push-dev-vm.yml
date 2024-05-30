@@ -23,6 +23,6 @@ jobs:
 
       - name: Run deploy script
         run: |
-          set -e # Exit immediately if a command exits with a non-zero status.
+          set -e
           ./deployDev.sh
           echo "VERSION 1.01"
