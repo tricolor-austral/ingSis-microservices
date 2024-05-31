@@ -2,13 +2,13 @@ SSH_USER="tricolor-ingsis"
 SSH_HOST="4.203.104.146"
 REPO_PATH="ingSis-microservices"
 GIT_USERNAME="marcocastagnaro"
-GIT_TOKEN=git_token
+GIT_TOKEN=$(cat git_token)
 GIT_GROUP= "tricolor-austral"
 
 chmod 400 dev_key.pem
 cat dev_key.pem
 cat git_token
-cat pull https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/${GIT_GROUP}/${REPO_PATH}.git
+echo https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/${GIT_GROUP}/${REPO_PATH}.git
 
 ssh -t -i dev_key.pem tricolor-ingsis@4.203.104.146 << EOF
   cd ${REPO_PATH}
