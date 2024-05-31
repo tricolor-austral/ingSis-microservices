@@ -1,20 +1,15 @@
-#!/bin/bash
-
 SSH_USER="tricolor-ingsis"
 SSH_HOST="4.203.104.146"
 REPO_PATH="ingSis-microservices"
 GIT_USERNAME="marcocastagnaro"
-GIT_TOKEN="GIT_TOKEN"
-DEVM_KEY="DEVM_KEY"
+GIT_TOKEN=git_token
 GIT_GROUP= "tricolor-austral"
 
-echo "${DEVM_KEY}" > dev_key.pem
-
-echo "Deploying to the development server"
-echo "${DEVM_KEY}"
 echo dev_key.pem
 
 chmod 400 dev_key.pem
+cat dev_key.pem
+cat GIT_TOKEN
 
 ssh -t -i dev_key.pem tricolor-ingsis@4.203.104.146 << EOF
   cd ${REPO_PATH}
