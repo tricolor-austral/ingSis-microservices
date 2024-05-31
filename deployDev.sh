@@ -3,7 +3,7 @@ SSH_HOST="4.203.104.146"
 REPO_PATH="ingSis-microservices"
 GIT_USERNAME="marcocastagnaro"
 GIT_TOKEN=$(cat git_token)
-GIT_GROUP= "tricolor-austral"
+GIT_GROUP="tricolor-austral"
 
 chmod 400 dev_key.pem
 cat dev_key.pem
