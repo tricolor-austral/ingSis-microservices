@@ -93,15 +93,6 @@ services:
       - snippet_runner_db
       - permission_api
       - permission_db
-
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot/ --force-renewal --email marco.castagnaro@ing.austral.edu.ar -d tricolor-austral.duckdns.org --agree-tos
-
 volumes:
   operations_volume:
   snippetrunner_volume:
