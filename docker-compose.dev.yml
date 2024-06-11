@@ -5,7 +5,7 @@ services:
     container_name: 'operations-api'
     image: 'ghcr.io/tricolor-austral/ingsis-operations:latest'
     ports:
-      - "8080:8080"
+      - "8083:8080"
     depends_on:
       - operations_db
     environment:
