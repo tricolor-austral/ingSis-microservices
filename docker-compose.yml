@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  operations_api:
+  operations-api:
     container_name: 'operations-api'
     image: 'ghcr.io/tricolor-austral/ingsis-operations:latest'
     ports:
@@ -26,7 +26,7 @@ services:
     volumes:
       - operations_volume:/var/lib/postgresql/data
 
-  snippet_runner_api:
+  snippet-runner-api:
     container_name: 'snippet-runner-api'
     image: 'ghcr.io/tricolor-austral/ingsis-snippetrunner:latest'
     ports:
@@ -51,7 +51,7 @@ services:
     volumes:
       - snippetrunner_volume:/var/lib/postgresql/data
 
-  permission_api:
+  permission-api:
     container_name: 'permission-api'
     image: 'ghcr.io/tricolor-austral/ingsis-permission:latest'
     ports:
