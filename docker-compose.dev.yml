@@ -103,5 +103,6 @@ services:
       - ./certbot/logs/:/var/log/letsencrypt
       - ./certbot/data:/usr/share/nginx/html/letsencrypt
 volumes:
-  pgdata:
-    external: false
+  operations_db:
+  permission_db:
+  snippet_runner_db:
