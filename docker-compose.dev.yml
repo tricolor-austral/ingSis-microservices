@@ -103,6 +103,6 @@ services:
       - ./certbot/logs/:/var/log/letsencrypt
       - ./certbot/data:/usr/share/nginx/html/letsencrypt
 volumes:
-  operations_db:
-  permission_db:
-  snippet_runner_db:
+  operations_volume:
+  permission_volume:
+  snippetrunner_volume:
