@@ -95,13 +95,15 @@ services:
       - snippet_runner_db
       - permission_api
       - permission_db
+
   certbot:
     image: certbot/certbot
     container_name: certbot
     volumes:
       - ./certbot/conf/:/etc/letsencrypt
       - ./certbot/logs/:/var/log/letsencrypt
-      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
 volumes:
   operations_volume:
   permission_volume:
