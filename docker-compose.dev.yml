@@ -1,81 +1,6 @@
 version: '3'
 
 services:
-  operations_api:
-    container_name: 'operations-api'
-    image: 'ghcr.io/tricolor-austral/ingsis-operations:latest'
-    ports:
-      - "8083:8080"
-    depends_on:
-      - operations_db
-    environment:
-      DB_HOST: operations_db
-      DB_PORT: 5432
-      DB_NAME: printscript-operations
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-
-  operations_db:
-    image: 'postgres:alpine'
-    environment:
-      - POSTGRES_DB=printscript-operations
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    expose:
-      - "5432"
-    volumes:
-      - operations_volume:/var/lib/postgresql/data
-
-  snippet_runner_api:
-    container_name: 'snippet-runner-api'
-    image: 'ghcr.io/tricolor-austral/ingsis-snippetrunner:latest'
-    ports:
-      - "8081:8080"
-    environment:
-      DB_HOST: snippet_runner_db
-      DB_PORT: 5432
-      DB_NAME: printscript-snippet-runner
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-    depends_on:
-      - snippet_runner_db
-
-  snippet_runner_db:
-    image: 'postgres:alpine'
-    environment:
-      - POSTGRES_DB=printscript-snippet-runner
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    expose:
-      - "5432"
-    volumes:
-      - snippetrunner_volume:/var/lib/postgresql/data
-
-  permission_api:
-    container_name: 'permission-api'
-    image: 'ghcr.io/tricolor-austral/ingsis-permission:latest'
-    ports:
-      - "8082:8080"
-    environment:
-      DB_HOST: permission_db
-      DB_PORT: 5432
-      DB_NAME: printscript-permission
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-    depends_on:
-      - permission_db
-
-  permission_db:
-    image: 'postgres:alpine'
-    environment:
-      - POSTGRES_DB=printscript-permission
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    expose:
-      - "5432"
-    volumes:
-      - permission_volume:/var/lib/postgresql/data
-
   proxy:
     container_name: 'reverse-proxy-dev'
     image: 'nginx:alpine'
@@ -90,11 +15,8 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     depends_on:
       - operations_api
-      - operations_db
       - snippet_runner_api
-      - snippet_runner_db
       - permission_api
-      - permission_db
 
   certbot:
     image: certbot/certbot
@@ -103,8 +25,3 @@ services:
       - ./certbot/conf/:/etc/letsencrypt
       - ./certbot/logs/:/var/log/letsencrypt
       - ./certbot/www:/var/www/certbot
-
-volumes:
-  operations_volume:
-  permission_volume:
-  snippetrunner_volume:
