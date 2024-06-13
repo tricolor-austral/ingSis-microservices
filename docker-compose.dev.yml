@@ -5,7 +5,7 @@ services:
     container_name: 'operations-api'
     image: 'ghcr.io/tricolor-austral/ingsis-operations:latest'
     ports:
-      - "8083:80"
+      - "8083:8080"
     depends_on:
       - operations_db
     environment:
@@ -30,7 +30,7 @@ services:
     container_name: 'snippet-runner-api'
     image: 'ghcr.io/tricolor-austral/ingsis-snippetrunner:latest'
     ports:
-      - "8081:80"
+      - "8081:8080"
     environment:
       DB_HOST: snippet_runner_db
       DB_PORT: 5432
@@ -55,7 +55,7 @@ services:
     container_name: 'permission-api'
     image: 'ghcr.io/tricolor-austral/ingsis-permission:latest'
     ports:
-      - "8082:80"
+      - "8082:8080"
     environment:
       DB_HOST: permission_db
       DB_PORT: 5432
@@ -80,13 +80,14 @@ services:
     container_name: 'reverse-proxy-dev'
     image: 'nginx:alpine'
     ports:
-      - 80:80
-      - 443:443
+      - '80:80'
+      - '443:443'
     volumes:
       - ./static/:/usr/share/nginx/html:ro
-      - ./conf.d:/etc/nginx/conf.d:ro
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./conf.d/:/etc/nginx/conf.d/:ro
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
     depends_on:
       - operations_api
       - operations_db
@@ -98,11 +99,9 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-#    command: certonly --webroot -w /var/www/certbot/ --force-renewal --email marco.castagnaro@ing.austral.edu.ar -d tricolor-austral.duckdns.org
-
+      - ./certbot/conf/:/etc/letsencrypt
+      - ./certbot/logs/:/var/log/letsencrypt
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
 volumes:
-  operations_volume:
-  snippetrunner_volume:
-  permission_volume:
+  pgdata:
+    external: false
