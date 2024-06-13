@@ -14,9 +14,9 @@ services:
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     depends_on:
-      - operations_api
-      - snippet_runner_api
-      - permission_api
+      - operations-api
+      - snippet-runner-api
+      - permission-api
 
   certbot:
     image: certbot/certbot
