@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  printscript-ui:
-      container_name: 'printscript-ui'
-      image: 'ghcr.io/tricolor-austral/printscript-ui:latest'
-      ports:
-        - "8084:8080"
+#  printscript-ui:
+#      container_name: 'printscript-ui'
+#      image: 'ghcr.io/tricolor-austral/printscript-ui:latest'
+#      ports:
+#        - "8084:8080"
 
   operations-api:
       container_name: 'operations-api'
@@ -18,15 +18,15 @@ services:
         DB_HOST: operations_db
         DB_PORT: 5432
         DB_NAME: printscript-operations
-        DB_USER: postgres
-        DB_PASSWORD: postgres
+        DB_USER: ${POSTGRES_USER}
+        DB_PASSWORD: ${POSTGRES_PASSWORD}
 
   operations_db:
       image: 'postgres:alpine'
       environment:
         - POSTGRES_DB=printscript-operations
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       expose:
         - "5432"
       volumes:
@@ -41,8 +41,8 @@ services:
         DB_HOST: snippet_runner_db
         DB_PORT: 5432
         DB_NAME: printscript-snippet-runner
-        DB_USER: postgres
-        DB_PASSWORD: postgres
+        DB_USER: ${POSTGRES_USER}
+        DB_PASSWORD: ${POSTGRES_PASSWORD}
       depends_on:
         - snippet_runner_db
 
@@ -50,8 +50,8 @@ services:
       image: 'postgres:alpine'
       environment:
         - POSTGRES_DB=printscript-snippet-runner
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       expose:
         - "5432"
       volumes:
@@ -66,8 +66,8 @@ services:
         DB_HOST: permission_db
         DB_PORT: 5432
         DB_NAME: printscript-permission
-        DB_USER: postgres
-        DB_PASSWORD: postgres
+        DB_USER: ${POSTGRES_USER}
+        DB_PASSWORD: ${POSTGRES_PASSWORD}
       depends_on:
         - permission_db
 
@@ -75,8 +75,8 @@ services:
       image: 'postgres:alpine'
       environment:
         - POSTGRES_DB=printscript-permission
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       expose:
         - "5432"
       volumes:
@@ -94,7 +94,7 @@ services:
     depends_on:
         - duckdns
         - certbot
-        - printscript-ui
+#        - printscript-ui
         - operations-api
         - snippet-runner-api
         - permission-api
