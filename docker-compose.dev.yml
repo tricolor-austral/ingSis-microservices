@@ -101,14 +101,13 @@ services:
         - operations_db
         - snippet_runner_db
         - permission_db
-#  duckdns:
-#    image: lscr.io/linuxserver/duckdns:version-d63af1c1
-#    container_name: duckdns
-#    environment:
-#      - SUBDOMAINS=tricolor-austral
-#      - TOKEN= ${DUCKDNS_TOKEN}
-#    restart: unless-stopped
-#
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:version-d63af1c1
+    container_name: duckdns
+    environment:
+      - SUBDOMAINS=tricolor-austral
+      - TOKEN=${DUCKDNS_TOKEN}
+    restart: unless-stopped
 #  certbot:
 #    container_name: "certbot"
 #    image: certbot/certbot:latest
