@@ -5,7 +5,7 @@ services:
       container_name: 'printscript-ui'
       image: 'ghcr.io/tricolor-austral/printscript-ui:latest'
       ports:
-        - "8084:8080"
+        - "3000:3000"
 
   operations-api:
       container_name: 'operations-api'
