@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-#  printscript-ui:
-#      container_name: 'printscript-ui'
-#      image: 'ghcr.io/tricolor-austral/printscript-ui:latest'
-#      ports:
-#        - "8084:8080"
+  printscript-ui:
+      container_name: 'printscript-ui'
+      image: 'ghcr.io/tricolor-austral/printscript-ui:latest'
+      ports:
+        - "8084:8080"
 
   operations-api:
       container_name: 'operations-api'
@@ -94,7 +94,7 @@ services:
     depends_on:
 #        - duckdns
 #        - certbot
-#        - printscript-ui
+        - printscript-ui
         - operations-api
         - snippet-runner-api
         - permission-api
