@@ -96,7 +96,25 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     command: certonly --webroot -w /var/www/certbot --force-renewal --email marco.castagnaro@ing.austral.edu.ar -d tricolor-austral.duckdns.org --agree-tos
+  api-manager:
+    container_name: "asset_service"
+    image: ghcr.io/austral-ingsis/snippet-asset-service:latest
+    ports:
+      - "8081:8080"
+    environment:
+      AZURE_HOST: "http://azurite"
 
+  azurite-manager:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: "azurite"
+    hostname: azurite
+    restart: always
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - blob:/workspace
 volumes:
     operations_volume:
     permission_volume:
