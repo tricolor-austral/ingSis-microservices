@@ -109,13 +109,13 @@ services:
       - SUBDOMAINS=tricolor-austral
       - TOKEN=${DUCKDNS_TOKEN}
     restart: unless-stopped
-#  certbot:
-#    container_name: "certbot"
-#    image: certbot/certbot:latest
-#    volumes:
-#      - ./certbot/conf:/etc/letsencrypt
-#      - ./certbot/www:/var/www/certbot
-#    command: certonly --webroot --webroot-path=/var/www/certbot --email marco.castagnaro@ing.austral.edu.ar --agree-tos --force-renewal -d tricolor-austral.duckdns.org
+  certbot:
+    container_name: "certbot"
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email marco.castagnaro@ing.austral.edu.ar -d tricolor-austral.duckdns.org --agree-tos
 
 volumes:
     operations_volume:
