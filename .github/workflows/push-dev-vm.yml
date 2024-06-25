@@ -34,5 +34,5 @@ jobs:
           key: ${{ secrets.INGSIS_DEV_KEY}}
           script: |
             cd ingSis-microservices
-            docker compose -f docker-compose.dev.yml stop
-            docker compose -f docker-compose.dev.yml up --build
+            sudo docker compose -f docker-compose.dev.yml stop
+            sudo docker compose -f docker-compose.dev.yml up --build
