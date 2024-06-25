@@ -12,20 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-#      - name: Set up SSH key
-#        env:
-#          DEVM_KEY: ${{ secrets.INGSIS_DEV_KEY }}
-#          GH_TOKEN: ${{ secrets.GIT_TOKEN }}
-#
-#        run: |
-#          echo "$DEVM_KEY" > dev_key.pem
-#          echo "$GH_TOKEN" > git_token
-#
-#      - name: Run deploy script
-#        run: |
-#          set -e
-#          ./deployDev.sh
-#          echo "VERSION 1.02"
+
       - name: Deployement
         uses: appleboy/ssh-action@master
         with:
