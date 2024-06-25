@@ -25,8 +25,8 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST}}
-          username: "snippet-searcher-admin"
-          key: ${{ secrets.INGSIS_DEV_KEY }}
+          username: "ingsis-dev"
+          key: ${{ secrets.INGSIS_DEV_KEY}}
           script: |
             cd ingSis-microservices
             docker compose -f docker-compose.dev.yml stop
