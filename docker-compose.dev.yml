@@ -109,7 +109,7 @@ services:
       - ./certbot/www:/var/www/certbot
 #    command: certonly --webroot -w /var/www/certbot --force-renewal --email marco.castagnaro@ing.austral.edu.ar -d tricolor-austral.duckdns.org --agree-tos
   api-manager:
-    container_name: "asset_service"
+    container_name: "asset-service"
     image: ghcr.io/austral-ingsis/snippet-asset-service:latest
     environment:
       AZURE_HOST: "http://azurite"
