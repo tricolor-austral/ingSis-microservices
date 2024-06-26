@@ -1,0 +1,26 @@
+name: Deploy to Azure VM
+
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+
+      - name: Deployement
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST}}
+          username: "tricolor-ingsis"
+          key: ${{ secrets.INGSIS_DEV_KEY}}
+          script: |
+            cd ingSis-microservices
+            sudo docker compose -f docker-compose.dev.yml stop
+            sudo git pull
+            sudo docker compose -f docker-compose.dev.yml up -d --build
