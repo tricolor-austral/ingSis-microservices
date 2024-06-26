@@ -12,8 +12,8 @@ services:
       container_name: 'operations-api'
       image: 'ghcr.io/tricolor-austral/ingsis-operations:latest'
       pull_policy: always
-      ports:
-        - "8083:8080"
+      expose:
+        - "8080"
       depends_on:
         - operations_db
       environment:
@@ -37,8 +37,8 @@ services:
       container_name: 'snippet-runner-api'
       image: 'ghcr.io/tricolor-austral/ingsis-snippetrunner:latest'
       pull_policy: always
-      ports:
-        - "8081:8080"
+      expose:
+        - "8080"
       depends_on:
         - runner-db
         - redis
@@ -59,8 +59,8 @@ services:
       container_name: 'permission-api'
       image: 'ghcr.io/tricolor-austral/ingsis-permission:latest'
       pull_policy: always
-      ports:
-        - "8082:8080"
+      expose:
+        - "8080"
       environment:
         DB_HOST: permission_db
         DB_PORT: 5432
