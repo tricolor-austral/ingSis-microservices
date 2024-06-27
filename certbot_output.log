@@ -1,0 +1,9 @@
+Simulating a certificate request for tricolor-austral.duckdns.org
+
+Certbot failed to authenticate some domains (authenticator: webroot). The Certificate Authority reported these problems:
+  Domain: tricolor-austral.duckdns.org
+  Type:   dns
+  Detail: DNS problem: server failure at resolver looking up A for tricolor-austral.duckdns.org; DNS problem: server failure at resolver looking up AAAA for tricolor-austral.duckdns.org
+
+Hint: The Certificate Authority failed to download the temporary challenge files created by Certbot. Ensure that the listed domains serve their content from the provided --webroot-path/-w and that files created there can be downloaded from the internet.
+
